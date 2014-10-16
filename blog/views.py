@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import Entry
 
 def blog(request):
-    return render(request, 'blog/main.html', {})
+    entries = Entry.objects.order_by('created_date')
+    return render(request, 'blog/main.html', {'entries' : entries})

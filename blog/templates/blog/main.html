@@ -1,3 +1,17 @@
 <html>
-    <p>this is the main page
+    <head>
+        <title>Blogger-Lite</title>
+    </head>
+    <body>
+        <div>
+            <h1>My Blog Home</h1>
+        </div>
+        <div>
+            {% for entry in entries %}
+                <div>
+                    <p> created: {{ entry.created_date }}
+                    <h2> {{ entry.title }} </h2>
+                    <p> {{ entry.text|linebreaks }}</p>
+            {% endfor %}
+        </div>
 </html>

@@ -1,12 +1,24 @@
 {% extends 'blog/base.html' %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}" />
+
 {% block title %} Blogger-Lite Dashboard {% endblock %}
 {% block body %}
     <h1>Blog Dashboard</h1>
-{% for entry in entries %}
-    <div>
-         <p> created: {{ entry.created_date }}
-         <h2> {{ entry.title }} </h2>
-         <p> {{ entry.text|linebreaks }}</p>
-    </div>
-{% endfor %}
+    
+    <!-- existing entries -->
+    {% for form in forms %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
+    {% endfor %}
+
+    <!-- new entry -->
+    <h3> New Post </h3>
+    <form method="POST" class='entry-form'>
+        {% csrf_token %}
+        {{ blankform.as_p }}
+    </form>
+    
 {% endblock %}

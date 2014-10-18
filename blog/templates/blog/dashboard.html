@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
+{% block title %} Blogger-Lite Dashboard {% endblock %}
 {% block body %}
-    <h1>My Blog Home</h1>
+    <h1>Blog Dashboard</h1>
 {% for entry in entries %}
     <div>
          <p> created: {{ entry.created_date }}

@@ -8,12 +8,12 @@
     
     <!-- existing entries -->
     {% for entry in entries %}
-        <div>
-            <h3> {{ entry.title }} <a href="{% url 'blog.views.editentry' entry.pk %}"> Edit </a></h3>
+        <div class="blogheading">
+            <h2 class="blogheading"> {{ entry.title }} </h2>
+            <button class="blogheading" onclick='window.location="{% url 'blog.views.editentry' entry.pk %}"'>Edit</button>
         </div>
     {% endfor %}
 
-    <div>
         <h3> Create New entry <a href="{% url 'blog.views.newentry' %}"> Add </a></h3>
     
 {% endblock %}

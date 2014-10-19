@@ -19,4 +19,16 @@ span.blogheading {
     padding-top: 8px;
     float: right;
     background-color: lightgreen;
+}
+
+button.blogheading {
+    width: 60px;
+    height: 2em;
+    border-radius:8px;
+    line-height: 0px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    padding-top: 0px;
+    float: right;
+    background-color: lightgreen;
 }    

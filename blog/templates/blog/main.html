@@ -3,8 +3,10 @@
     <h1>My Blog Home</h1>
 {% for entry in entries %}
     <div>
-         <p> created: {{ entry.created_date }}
-         <h2> {{ entry.title }} </h2>
+        <div class="blogheading">
+            <h2 class="blogheading"> {{ entry.title }} </h2> 
+            <span class="blogheading">{{ entry.created_date }}</span>
+        </div>
          <p> {{ entry.text|linebreaks }}</p>
     </div>
 {% endfor %}

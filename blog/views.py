@@ -3,24 +3,40 @@ from .models import Entry
 from .forms import EntryForm
 
 def blog(request):
+    """
+    Public blog view
+    """
     entries = Entry.objects.order_by('created_date')
     return render(request, 'blog/main.html', {'entries' : entries})
 
 def dashboard(request):
-
+    """
+    View for admin dashboard; similar to the public 'blog' view.
+    """
     entries = Entry.objects.order_by('created_date')
-    forms = [EntryForm({'title' : entry.title, 'text' : entry.text})\
-             for entry in entries]
-    blankform = EntryForm()
-    
-    return render(request, 'blog/dashboard.html', 
-                  {'forms' : forms, 'blankform' : blankform, 'entries' : entries})
+    return render(request, 'blog/dashboard.html', {'entries' : entries})
  
-def newentry(request, pk):
-    entry = get_object_or_404(Entry, pk=pk)
-
+def newentry(request):
+    """
+    View for creating new blog entries
+    """
     if request.method == 'POST':
         form = EntryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog.views.dashboard')
+    else:
+        form = EntryForm()
+
+    return render(request, 'blog/newentry.html', {'form' : form })
+
+def editentry(request, pk):
+    """
+    View for editing existing blog entries
+    """
+    entry = get_object_or_404(Entry, pk=pk)
+    if request.method == 'POST':
+        form = EntryForm(request.POST, instance=entry)
         if form.is_valid():
             form.save()
             return redirect('blog.views.dashboard')

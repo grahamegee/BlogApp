@@ -9,7 +9,7 @@
     <!-- existing entries -->
     {% for entry in entries %}
         <div>
-            <h3> {{ entry.title }} <a href="{% url 'blog.views.newentry' entry.pk %}"> Edit </a></h3>
+            <h3> {{ entry.title }} <a href="{% url 'blog.views.editentry' entry.pk %}"> Edit </a></h3>
         </div>
     {% endfor %}
 

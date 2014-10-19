@@ -36,11 +36,14 @@ def editentry(request, pk):
     """
     entry = get_object_or_404(Entry, pk=pk)
     if request.method == 'POST':
-        form = EntryForm(request.POST, instance=entry)
-        if form.is_valid():
-            form.save()
-            return redirect('blog.views.dashboard')
+        if request.POST.get('delete'):
+            entry.delete()
+        else:
+            form = EntryForm(request.POST, instance=entry)
+            if form.is_valid():
+                form.save()
+        return redirect('blog.views.dashboard')
     else:
         form = EntryForm(instance=entry)
 
-    return render(request, 'blog/newentry.html', {'form' : form })
+    return render(request, 'blog/editentry.html', {'form' : form })

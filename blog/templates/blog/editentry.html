@@ -6,7 +6,7 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Delete" name='delete'/>
-        <input type="submit" value="Post" name='post'/>
+        <input type="submit" value="Delete" name='delete' id='del'/>
+        <input type="submit" value="Post" name='post' id='post'/>
     </form>
 {% endblock %}

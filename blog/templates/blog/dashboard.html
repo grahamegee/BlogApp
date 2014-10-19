@@ -10,7 +10,7 @@
     {% for entry in entries %}
         <div class="blogheading">
             <h2 class="blogheading"> {{ entry.title }} </h2>
-            <button class="blogheading" onclick='window.location="{% url 'blog.views.editentry' entry.pk %}"'>Edit</button>
+            <button class="edit" onclick='window.location="{% url 'blog.views.editentry' entry.pk %}"'>Edit</button>
         </div>
     {% endfor %}
 

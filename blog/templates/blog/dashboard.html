@@ -7,18 +7,13 @@
     <h1>Blog Dashboard</h1>
     
     <!-- existing entries -->
-    {% for form in forms %}
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-        </form>
+    {% for entry in entries %}
+        <div>
+            <h3> {{ entry.title }} <a href="{% url 'blog.views.newentry' entry.pk %}"> Edit </a></h3>
+        </div>
     {% endfor %}
 
-    <!-- new entry -->
-    <h3> New Post </h3>
-    <form method="POST" class='entry-form'>
-        {% csrf_token %}
-        {{ blankform.as_p }}
-    </form>
+    <div>
+        <h3> Create New entry <a href="{% url 'blog.views.newentry' %}"> Add </a></h3>
     
 {% endblock %}

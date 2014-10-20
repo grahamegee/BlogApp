@@ -5,9 +5,26 @@
     <div>
         <div class="blogheading">
             <h2 class="blogheading"> {{ entry.title }} </h2> 
+            <button id="entry{{ forloop.counter }}" class="show" onclick="javascript:showhide( this.id, {{ entry.pk }})">hide</button>
             <span class="blogheading">{{ entry.created_date }}</span>
         </div>
-         <p> {{ entry.text|linebreaks }}</p>
+        <div id ={{ entry.pk }} class='unhidden'>
+            <p> {{ entry.text|linebreaks }}</p>
+        </div>
     </div>
 {% endfor %}
+    <script type="text/javascript">
+        function showhide(butID, divID) {
+            var item = document.getElementById(divID);
+            var but = document.getElementById(butID);
+                if (item.className =='hidden') {
+                    item.className = 'unhidden';
+                    but.textContent = 'hide';
+                }
+                else{
+                    item.className  = 'hidden';
+                    but.textContent = 'show';
+                }
+        }
+    </script>
 {% endblock %}

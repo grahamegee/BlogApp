@@ -10,10 +10,30 @@
     {% for entry in entries %}
         <div class="blogheading">
             <h2 class="blogheading"> {{ entry.title }} </h2>
+            <!-- don't like this much ideally set button id to prefix_pk
+                 but can't work out how to do that just yet -->
+            <button id="entry{{ forloop.counter }}" class="show" onclick="javascript:showhide( this.id, {{ entry.pk }})">show</button>
             <button class="edit" onclick='window.location="{% url 'blog.views.editentry' entry.pk %}"'>Edit</button>
+        </div>
+        <div id={{ entry.pk }} class="hidden">
+            <p>{{ entry.text|linebreaks }}</p>
         </div>
     {% endfor %}
 
         <h3> Create New entry <a href="{% url 'blog.views.newentry' %}"> Add </a></h3>
-    
+   
+    <script type="text/javascript">
+        function showhide(butID, divID) {
+            var item = document.getElementById(divID);
+            var but = document.getElementById(butID);
+                if (item.className =='hidden') {
+                    item.className = 'unhidden';
+                    but.textContent = 'hide';
+                }
+                else{
+                    item.className  = 'hidden';
+                    but.textContent = 'show';
+                }
+        }
+    </script>
 {% endblock %}

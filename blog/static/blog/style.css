@@ -41,6 +41,27 @@ button.edit:hover{
     border-color: black;
 }  
 
+button.show {
+    width: 60px;
+    height: 2.5em;
+    float: right;
+    background-color: white;
+    border-radius:8px;
+    color: black;
+    border: 2px solid;
+    border-color: black;
+    margin-left: 2px;
+}  
+
+button.show:hover{
+    background-color: #white;
+    color: blue;
+    border-radius:8px;
+    border: 2px solid;
+    border-color: black;
+    margin-left: 2px;
+}  
+
 #del {
     width: 60px;
     height: 2.5em;
@@ -95,3 +116,6 @@ input[type="text"]{
     border-radius:8px;
     background-color: white;
 }
+
+.hidden { display : none; }
+.unhidden { display : block; }

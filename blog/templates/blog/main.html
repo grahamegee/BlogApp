@@ -1,12 +1,12 @@
 {% extends 'blog/base.html' %}
 {% block body %}
-    <h1>My Blog Home</h1>
+    <h1>Blog Home</h1>
 {% for entry in entries %}
     <div>
         <div class="blogheading">
             <h2 class="blogheading"> {{ entry.title }} </h2> 
             <button id="entry{{ forloop.counter }}" class="show" onclick="javascript:showhide( this.id, {{ entry.pk }})">hide</button>
-            <span class="blogheading">{{ entry.created_date }}</span>
+            <span class="blogheading" style="margin-right:4px" >{{ entry.created_date }}</span>
         </div>
         <div id ={{ entry.pk }} class='unhidden'>
             <p> {{ entry.text|linebreaks }}</p>

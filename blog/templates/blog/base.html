@@ -6,9 +6,12 @@
     </head>
     <body>
         {% block nav %}
-        <ul id="nav">
+        <div id="nav">
+        <ul>
             <li>{% block nav-blog %}<a href="{% url 'blog.views.blog' %}">Home</a>{% endblock %}</li>
             <li>{% block nav-dashboard %}<a href="{% url 'blog.views.dashboard' %}">Dashboard</a>{% endblock %}</li>
+        </ul>
+        </div>
         {% endblock %}
         <div>
         {% block body %}{% endblock  %}

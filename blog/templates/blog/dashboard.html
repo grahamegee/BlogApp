@@ -12,8 +12,13 @@
             <h2 class="blogheading"> {{ entry.title }} </h2>
             <!-- don't like this much ideally set button id to prefix_pk
                  but can't work out how to do that just yet -->
+            <div class="spacer"></div>
+            <div class="cell">
             <button id="entry{{ forloop.counter }}" class="show" onclick="javascript:showhide( this.id, {{ entry.pk }})">show</button>
+            </div>
+            <div class="cell">
             <button class="edit" onclick='window.location="{% url 'blog.views.editentry' entry.pk %}"'>Edit</button>
+            </div>
         </div>
         <div id={{ entry.pk }} class="hidden">
             <p>{{ entry.text|linebreaks }}</p>

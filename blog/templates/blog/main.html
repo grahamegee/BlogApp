@@ -4,9 +4,12 @@
 {% for entry in entries %}
     <div>
         <div class="blogheading">
-            <h2 class="blogheading"> {{ entry.title }} </h2> 
-            <button id="entry{{ forloop.counter }}" class="show" onclick="javascript:showhide( this.id, {{ entry.pk }})">hide</button>
+            <h2 class="blogheading"> {{ entry.title }} </h2>
+            <div class="spacer"></div> 
             <span class="blogheading" style="margin-right:4px" >{{ entry.created_date }}</span>
+            <div class="cell">
+            <button id="entry{{ forloop.counter }}" class="show" onclick="javascript:showhide( this.id, {{ entry.pk }})">hide</button>
+            </div>
         </div>
         <div id ={{ entry.pk }} class='unhidden'>
             <p> {{ entry.text|linebreaks }}</p>

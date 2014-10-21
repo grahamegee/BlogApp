@@ -2,7 +2,7 @@ from django import forms
 from .models import Entry
 
 class EntryForm(forms.ModelForm):
-    title = forms.CharField(label='Title', max_length=100)
+    title = forms.CharField(label='Title', max_length=200)
     text  = forms.Textarea()
     class Meta:
         model = Entry

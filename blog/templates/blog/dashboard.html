@@ -27,18 +27,7 @@
     <div>
         <button class="add" onclick='window.location="{% url 'blog.views.newentry' %}"'>New Entry</button>
     </div>   
-    <script type="text/javascript">
-        function showhide(butID, divID) {
-            var item = document.getElementById(divID);
-            var but = document.getElementById(butID);
-                if (item.className =='hidden') {
-                    item.className = 'unhidden';
-                    but.textContent = 'hide';
-                }
-                else{
-                    item.className  = 'hidden';
-                    but.textContent = 'show';
-                }
-        }
-    </script>
+
+    <script type="text/javascript" src="{% static 'blog/showhide.js' %}"></script>
+
 {% endblock %}

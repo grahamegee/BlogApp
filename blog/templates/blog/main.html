@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load staticfiles %}
 {% block body %}
     <h1>Blog Home</h1>
 {% for entry in entries %}
@@ -16,18 +17,7 @@
         </div>
     </div>
 {% endfor %}
-    <script type="text/javascript">
-        function showhide(butID, divID) {
-            var item = document.getElementById(divID);
-            var but = document.getElementById(butID);
-                if (item.className =='hidden') {
-                    item.className = 'unhidden';
-                    but.textContent = 'hide';
-                }
-                else{
-                    item.className  = 'hidden';
-                    but.textContent = 'show';
-                }
-        }
-    </script>
+
+    <script type="text/javascript" src="{% static 'blog/showhide.js' %}"></script>
+
 {% endblock %}

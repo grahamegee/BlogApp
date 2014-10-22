@@ -23,7 +23,7 @@ handlers:
   expiration: '0'
 
 - url: /static
-  static_dir: /blog/static
+  static_dir: blog/static
 
 - url: /.*
   script: djangoappengine.main.application

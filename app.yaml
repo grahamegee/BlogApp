@@ -24,3 +24,6 @@ handlers:
 
 - url: /.*
   script: djangoappengine.main.application
+
+- url: /static
+  static_dir: static

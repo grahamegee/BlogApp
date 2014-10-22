@@ -159,5 +159,99 @@ class EditEntryViewTests(TestCase):
         self.assertEqual(form.instance.title, entry.title)
         self.assertEqual(form.instance.text, entry.text)
 
+    def test_valid_post_edits_existing_entry(self):
+        """
+        The entry that we edit should be updated with the data provided in the form
+        """
+        new_data = {'title' : 'update', 'text' : 'update'}
+        entry = create_entries([('title', 'new post')])[0]
+        response = self.client.post((EDIT_URL % entry.pk), 
+                                    new_data,
+                                    follow=True)
+        
+        self.assertEqual(response.context['entries'][0].title, new_data['title'])
+        self.assertEqual(response.context['entries'][0].text, new_data['text'])
 
+    def test_valid_post_doesnt_create_new_entry(self):
+        """
+        Editing an entry should not create a new entry
+        """
+        new_data = {'title' : 'update', 'text' : 'update'}
+        entry1, entry2 = create_entries([('title 1', 'post 1'),
+                                         ('title 2', 'post 2')])
 
+        response = self.client.post((EDIT_URL % entry2.pk),
+                                    new_data,
+                                    follow=True)
+
+        self.assertEqual(len(response.context['entries']), 2)
+
+    def test_valid_post_redirects_to_dashboard(self):
+        """
+        If the form input data is valid redirect to dashboard for viewing
+        """
+        new_data = {'title' : 'update', 'text' : 'update'}
+        entry = create_entries([('title', 'new post')])[0]
+        response = self.client.post((EDIT_URL % entry.pk), 
+                                    new_data,
+                                    follow=True)
+
+        self.assertIn('/dashboard/', response.redirect_chain[0][0])
+        self.assertNotIn('/edit/', response.redirect_chain[0][0])
+
+    def test_invalid_post_no_redirect(self):
+        """
+        If the form input data is invalid don't redirect to the dashboard
+        """
+        #tested various forms of invalid data with new posts, so only check once
+        #here
+        new_data = {'title' : 'update', 'text' : ''}
+        entry = create_entries([('title', 'new post')])[0]
+        response = self.client.post((EDIT_URL % entry.pk), 
+                                    new_data,
+                                    follow=True)
+
+        self.assertEqual(len(response.redirect_chain), 0)
+
+    def test_delete_entry_removes_entry(self):
+        """
+        check the entry is actually deleted.
+        """
+        entries = create_entries([('title 1','text 1'),
+                                  ('title 2','text 2')])
+        entry_count = len(entries)
+        entry1, entry2 = entries
+
+        response = self.client.post((EDIT_URL % entry2.pk),
+                                    {'delete': 'delete'},
+                                    follow=True)
+
+        self.assertEqual(len(response.context['entries']), entry_count - 1)
+    
+    def test_delete_entry_redirects_to_dashboard(self):
+        """
+        If an entry is deleted redirect to dashboard for viewing
+        """
+        entry = create_entries([('title', 'new post')])[0]
+        response = self.client.post((EDIT_URL % entry.pk), 
+                                    {'delete':'delete'},
+                                    follow=True)
+
+        self.assertIn('/dashboard/', response.redirect_chain[0][0])
+        self.assertNotIn('/edit/', response.redirect_chain[0][0])
+    
+    def test_delete_entry_removes_correct_entry(self):
+        """
+        check the entry is actually deleted.
+        """
+        entries = create_entries([('title 1','text 1'),
+                                  ('title 2','text 2')])
+        entry_count = len(entries)
+        entry1, entry2 = entries
+
+        response = self.client.post((EDIT_URL % entry2.pk),
+                                    {'delete': 'delete'},
+                                    follow=True)
+        # diagnostic
+        self.assertEqual(len(response.context['entries']), entry_count - 1)
+        self.assertEqual(response.context['entries'][0].pk, entry1.pk) 
